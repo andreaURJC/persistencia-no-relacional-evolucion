@@ -1,4 +1,4 @@
-package es.urjc.code.mappedsuperclass;
+package com.urjc.plains.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,15 +8,12 @@ import java.text.ParseException;
 import java.util.List;
 
 /**
- * Cargador de la BD y ejemplos de consulta.
- *
- * @author J. Manuel Colmenar
+ * Cargador de la BD y resultado de las consultas
  */
 @Controller
 public class DatabaseLoader implements CommandLineRunner {
 
     @Override
-    public void run(String... args) throws ParseException {
-
+    public void run(String... args) {
     }
 }

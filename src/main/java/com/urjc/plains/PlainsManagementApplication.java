@@ -1,4 +1,4 @@
-package es.urjc.code.mappedsuperclass;
+package com.urjc.plains;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

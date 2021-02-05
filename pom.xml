@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.urjc</groupId>
-  <artifactId>plains-management</artifactId>
+  <artifactId>plains</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>plains-management</name>
+  <name>plains</name>
 
   <!-- Spring Boot necesario como proyecto padre -->
   <parent>
