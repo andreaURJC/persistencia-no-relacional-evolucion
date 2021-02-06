@@ -21,8 +21,8 @@ public class Revision {
     private int horas;
 
     @ManyToOne
-    @JoinColumn(name = "empleado")
-    private Mecanico empleado;
+    @JoinColumn(name = "mecanico")
+    private Mecanico mecanico;
 
     private String tipo;
 
@@ -32,12 +32,12 @@ public class Revision {
     @JoinColumn(name = "aeropuerto")
     private Aeropuerto aeropuerto;
 
-    public Revision(Avion avion, Date fechaInicio, Date fechaFin, int horas, Mecanico empleado, String tipo, String descripcion, Aeropuerto aeropuerto) {
+    public Revision(Avion avion, Date fechaInicio, Date fechaFin, int horas, Mecanico mecanico, String tipo, String descripcion, Aeropuerto aeropuerto) {
         this.avion = avion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.horas = horas;
-        this.empleado = empleado;
+        this.mecanico = mecanico;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.aeropuerto = aeropuerto;
@@ -85,12 +85,12 @@ public class Revision {
         this.horas = horas;
     }
 
-    public Mecanico getEmpleado() {
-        return empleado;
+    public Mecanico getMecanico() {
+        return mecanico;
     }
 
-    public void setEmpleado(Mecanico empleado) {
-        this.empleado = empleado;
+    public void setMecanico(Mecanico mecanico) {
+        this.mecanico = mecanico;
     }
 
     public String getTipo() {

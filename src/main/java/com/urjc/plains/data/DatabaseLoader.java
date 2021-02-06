@@ -1,13 +1,17 @@
 package com.urjc.plains.data;
 
 import com.urjc.plains.dtos.AvionesRevisadosDTO;
+import com.urjc.plains.dtos.VuelosPorCiudadDestinoYFechaDTO;
 import com.urjc.plains.models.*;
 import com.urjc.plains.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -60,8 +64,12 @@ public class DatabaseLoader implements CommandLineRunner {
         Tripulante tripulante1 = new Tripulante("Rafael", "Santos", "Iberia", "Azafato");
         Tripulante tripulante2 = new Tripulante("Ane", "Colina", "Emirates", "Azafata");
 
-        Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, null, 2.587);
-        Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, null, 3.27);
+        Calendar cVuelo1 = Calendar.getInstance();
+        Calendar cVuelo2 = Calendar.getInstance();
+        cVuelo2.add(Calendar.MONTH, -2);
+
+        Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, cVuelo1.getTime(), 2.587);
+        Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, cVuelo2.getTime(), 3.27);
 
         VueloTripulante v1t1 = new VueloTripulante(vuelo1,tripulante1);
         VueloTripulante v1t2 = new VueloTripulante(vuelo1,tripulante2);
@@ -80,5 +88,16 @@ public class DatabaseLoader implements CommandLineRunner {
         avionesRevisados.forEach(avion -> System.out.println(avion));
         System.out.println("----------------------------------------");
 
+        String destino = "Leon";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = dateFormat.format(cVuelo1.getTime());
+
+        List<VuelosPorCiudadDestinoYFechaDTO> vuelos = vueloRepository.findVuelosByDestinoAndFecha(destino, strDate);
+        System.out.println("----------------------------------------");
+        System.out.println("-------------- Consulta 2 --------------");
+        System.out.println("----------------------------------------");
+        System.out.println("Vuelos con destino " + destino + " para la fecha " + strDate + ":");
+        vuelos.forEach(vuelo -> System.out.println(vuelo));
+        System.out.println("----------------------------------------");
     }
 }

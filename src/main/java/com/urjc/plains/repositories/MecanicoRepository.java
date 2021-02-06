@@ -10,6 +10,6 @@ import java.util.List;
 public interface MecanicoRepository extends JpaRepository<Mecanico, Long> {
 
     @Query("SELECT DISTINCT new com.urjc.plains.dtos.AvionesRevisadosDTO(r.avion.matricula, m.nombre, m.apellidos)" +
-            "FROM Mecanico m JOIN Revision r ON m.codigoEmpleado = r.empleado.codigoEmpleado")
+            "FROM Mecanico m JOIN Revision r ON m.codigoEmpleado = r.mecanico.codigoEmpleado")
     List<AvionesRevisadosDTO> findAvionesWithMecanicos();
 }
