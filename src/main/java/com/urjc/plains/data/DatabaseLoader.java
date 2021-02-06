@@ -2,6 +2,7 @@ package com.urjc.plains.data;
 
 import com.urjc.plains.dtos.AvionesRevisadosDTO;
 import com.urjc.plains.dtos.CiudadesOrigenTripulanteDTO;
+import com.urjc.plains.dtos.ResumenVuelosTripulantesDTO;
 import com.urjc.plains.dtos.VuelosPorCiudadDestinoYFechaDTO;
 import com.urjc.plains.models.*;
 import com.urjc.plains.repositories.*;
@@ -128,5 +129,14 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("----------------------------------------");
         System.out.println();
 
+
+        List<ResumenVuelosTripulantesDTO> resumen = tripulanteRepository.findResumenVuelosTripulantes();
+        System.out.println();
+        System.out.println("----------------------------------------");
+        System.out.println("-------------- Consulta 4 --------------");
+        System.out.println("----------------------------------------");
+        resumen.forEach(tripulanteResumen -> System.out.println(tripulanteResumen));
+        System.out.println("----------------------------------------");
+        System.out.println();
     }
 }
