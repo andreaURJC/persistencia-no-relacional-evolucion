@@ -18,11 +18,11 @@ public class Vuelo {
     private Avion avion;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "iata", insertable = false, updatable = false)
     private Aeropuerto aeropuertoOrigen;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "iata", insertable = false, updatable = false)
     private Aeropuerto aeropuertoDestino;
 
     private Date fechaHoraVuelo;
