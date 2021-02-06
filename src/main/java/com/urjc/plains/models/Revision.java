@@ -13,7 +13,7 @@ public class Revision {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "avionRevisado")
     private Avion avionRevisado;
 
     private Date fechaInicio;
@@ -22,9 +22,8 @@ public class Revision {
 
     private int duracionRevision;
 
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "empleadoCargo")
     private Mecanico empleadoCargo;
 
     private String tipoRevision;
@@ -32,7 +31,7 @@ public class Revision {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "iata")
+    @JoinColumn(name = "aeropuertoRevision")
     private Aeropuerto aeropuertoRevision;
 
     public Revision(Avion avionRevisado, Date fechaInicio, Date fechaFin, int duracionRevision, Mecanico empleadoCargo, String tipoRevision, String descripcion, Aeropuerto aeropuertoRevision) {

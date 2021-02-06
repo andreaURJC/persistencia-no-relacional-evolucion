@@ -11,18 +11,18 @@ public class Vuelo {
     @GeneratedValue
     private Long id;
 
-    private String company;
+    private String compania;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "avion")
     private Avion avion;
 
     @ManyToOne
-    @JoinColumn(name = "iata", insertable = false, updatable = false)
+    @JoinColumn(name = "aeropuertoOrigen")
     private Aeropuerto aeropuertoOrigen;
 
     @ManyToOne
-    @JoinColumn(name = "iata", insertable = false, updatable = false)
+    @JoinColumn(name = "aeropuertoDestino")
     private Aeropuerto aeropuertoDestino;
 
     private Date fechaHoraVuelo;
@@ -33,7 +33,7 @@ public class Vuelo {
     private List<VueloTripulante> tripulantes;
 
     public Vuelo(String company, Avion avion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, Date fechaHoraVuelo, int duracionVuelo) {
-        this.company = company;
+        this.compania = company;
         this.avion = avion;
         this.aeropuertoOrigen = aeropuertoOrigen;
         this.aeropuertoDestino = aeropuertoDestino;
@@ -51,12 +51,12 @@ public class Vuelo {
         this.id = id;
     }
 
-    public String getCompany() {
-        return company;
+    public String getCompania() {
+        return compania;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setCompania(String compania) {
+        this.compania = compania;
     }
 
     public Avion getAvion() {

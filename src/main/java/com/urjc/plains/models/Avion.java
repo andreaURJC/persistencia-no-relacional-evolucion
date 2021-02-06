@@ -7,8 +7,7 @@ import java.util.List;
 public class Avion {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String matricula;
 
     private String fabricante;
 
@@ -24,18 +23,19 @@ public class Avion {
 
     public Avion() {}
 
-    public Avion(String fabricante, String modelo, int horasVuelo) {
+    public Avion(String matricula, String fabricante, String modelo, int horasVuelo) {
+        this.matricula = matricula;
         this.fabricante = fabricante;
         this.modelo = modelo;
         this.horasVuelo = horasVuelo;
     }
 
-    public Long getId() {
-        return id;
+    public String getId() {
+        return matricula;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getFabricante() {

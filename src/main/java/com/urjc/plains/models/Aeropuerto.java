@@ -9,7 +9,7 @@ import java.util.List;
 public class Aeropuerto {
 
     @Id
-    private int iata;
+    private String iata;
 
     private String nombre;
 
@@ -28,17 +28,18 @@ public class Aeropuerto {
 
     public Aeropuerto() {}
 
-    public Aeropuerto(String nombre, String ciudad, String pais) {
+    public Aeropuerto(String iata, String nombre, String ciudad, String pais) {
+        this.iata = iata;
         this.ciudad = ciudad;
         this.nombre = nombre;
         this.pais = pais;
     }
 
-    public int getIata() {
+    public String getIata() {
         return iata;
     }
 
-    public void setIata(int iata) {
+    public void setIata(String iata) {
         this.iata = iata;
     }
 
