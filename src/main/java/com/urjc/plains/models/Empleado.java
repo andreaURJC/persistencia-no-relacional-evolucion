@@ -1,7 +1,5 @@
 package com.urjc.plains.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -26,6 +24,46 @@ public abstract class Empleado {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.empresa = empresa;
+        this.codigoEmpresa = codigoEmpresa;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public int getCodigoEmpresa() {
+        return codigoEmpresa;
+    }
+
+    public void setCodigoEmpresa(int codigoEmpresa) {
         this.codigoEmpresa = codigoEmpresa;
     }
 }

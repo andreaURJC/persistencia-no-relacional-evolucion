@@ -24,4 +24,28 @@ public class Mecanico extends Empleado {
         this.anoIncorporacion = anoIncorporacion;
         this.formacion = formacion;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getAnoIncorporacion() {
+        return anoIncorporacion;
+    }
+
+    public void setAnoIncorporacion(int anoIncorporacion) {
+        this.anoIncorporacion = anoIncorporacion;
+    }
+
+    public String getFormacion() {
+        return formacion;
+    }
+
+    public void setFormacion(String formacion) {
+        this.formacion = formacion;
+    }
 }

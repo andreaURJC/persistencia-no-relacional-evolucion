@@ -1,12 +1,9 @@
 package com.urjc.plains.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 public class Tripulante extends Empleado {
 
     @Id
@@ -15,6 +12,9 @@ public class Tripulante extends Empleado {
 
     private String puesto;
 
+    @OneToMany(mappedBy = "tripulante", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VueloTripulante> vuelos;
+
     public Tripulante() {}
 
     public Tripulante(String nombre, String apellidos, String empresa, int codigoEmpresa, String puesto) {
@@ -22,11 +22,27 @@ public class Tripulante extends Empleado {
         this.puesto = puesto;
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "tripulante_vuelo",
-            joinColumns = {@JoinColumn(name = "tripulante_id")},
-            inverseJoinColumns = {@JoinColumn(name = "vuelo_id")}
-    )
-    private List<Vuelo> vuelos;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
+    public List<VueloTripulante> getVuelos() {
+        return vuelos;
+    }
+
+    public void setVuelos(List<VueloTripulante> vuelos) {
+        this.vuelos = vuelos;
+    }
 }
