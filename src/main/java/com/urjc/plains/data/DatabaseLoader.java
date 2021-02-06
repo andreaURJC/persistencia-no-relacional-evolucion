@@ -1,6 +1,7 @@
 package com.urjc.plains.data;
 
 import com.urjc.plains.dtos.AvionesRevisadosDTO;
+import com.urjc.plains.dtos.CiudadesOrigenTripulanteDTO;
 import com.urjc.plains.dtos.VuelosPorCiudadDestinoYFechaDTO;
 import com.urjc.plains.models.*;
 import com.urjc.plains.repositories.*;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Cargador de la BD y resultado de las consultas
@@ -82,22 +84,49 @@ public class DatabaseLoader implements CommandLineRunner {
 
         List<AvionesRevisadosDTO> avionesRevisados = mecanicoRepository.findAvionesWithMecanicos();
 
+        System.out.println();
         System.out.println("----------------------------------------");
         System.out.println("-------------- Consulta 1 --------------");
         System.out.println("----------------------------------------");
         avionesRevisados.forEach(avion -> System.out.println(avion));
         System.out.println("----------------------------------------");
+        System.out.println();
 
         String destino = "Leon";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = dateFormat.format(cVuelo1.getTime());
 
         List<VuelosPorCiudadDestinoYFechaDTO> vuelos = vueloRepository.findVuelosByDestinoAndFecha(destino, strDate);
+        System.out.println();
         System.out.println("----------------------------------------");
         System.out.println("-------------- Consulta 2 --------------");
         System.out.println("----------------------------------------");
         System.out.println("Vuelos con destino " + destino + " para la fecha " + strDate + ":");
         vuelos.forEach(vuelo -> System.out.println(vuelo));
         System.out.println("----------------------------------------");
+        System.out.println();
+
+        Optional<Tripulante> tripulanteConsulta = tripulanteRepository.findAll().stream().findFirst();
+        System.out.println();
+        System.out.println("----------------------------------------");
+        System.out.println("-------------- Consulta 3 --------------");
+        System.out.println("----------------------------------------");
+        if (tripulanteConsulta.isPresent()) {
+            Long codigoEmpleado = tripulanteConsulta.get().getCodigoEmpleado();
+            List<CiudadesOrigenTripulanteDTO> ciudades = tripulanteRepository.findCiudadesOrigenByCodigoEmpleado(codigoEmpleado);
+            if (ciudades.isEmpty()) {
+                System.out.println("No se han encontrado vuelos para el código de empleado: " + codigoEmpleado + ".");
+            } else {
+                System.out.println("El tripulante con código de empleado: " + codigoEmpleado
+                        + " (" + ciudades.get(0).getNombre() + " " + ciudades.get(0).getApellidos() + ")"
+                        + " ha volado desde las siguientes ciudades:");
+                ciudades.forEach(ciudad -> System.out.println(ciudad));
+            }
+        } else {
+            System.out.println("No se ha encontrado ningún tripulante.");
+        }
+        System.out.println("----------------------------------------");
+        System.out.println();
+
     }
 }

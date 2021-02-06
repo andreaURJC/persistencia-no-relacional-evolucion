@@ -1,5 +1,7 @@
 package com.urjc.plains.dtos;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VuelosPorCiudadDestinoYFechaDTO {
@@ -24,11 +26,12 @@ public class VuelosPorCiudadDestinoYFechaDTO {
 
     @Override
     public String toString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         return "Código del vuelo: " + codigoVuelo +
                 " | Companía: " + compania +
                 " | IATA aeropuerto de origen: " + iataOrigen +
                 " | IATA aeropuerto de destino: " + iataDestino +
-                " | Fecha y hora de salida: " + fechaHora +
+                " | Fecha y hora de salida: " + dateFormat.format(fechaHora) +
                 " | Duración del vuelo: " + duracion + " h";
     }
 }
