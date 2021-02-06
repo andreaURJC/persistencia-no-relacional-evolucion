@@ -8,7 +8,7 @@ public abstract class Empleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long codigoEmpleado;
 
     private String nombre;
 
@@ -21,12 +21,12 @@ public abstract class Empleado {
         this.apellidos = apellidos;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCodigoEmpleado() {
+        return codigoEmpleado;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCodigoEmpleado(Long id) {
+        this.codigoEmpleado = id;
     }
 
     public String getNombre() {

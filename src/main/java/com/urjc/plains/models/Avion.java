@@ -13,9 +13,9 @@ public class Avion {
 
     private String modelo;
 
-    private int horasVuelo;
+    private Integer horasVuelo;
 
-    @OneToMany(mappedBy = "avionRevisado")
+    @OneToMany(mappedBy = "avion")
     List<Revision> revisiones;
 
     @OneToMany(mappedBy = "avion")
@@ -23,7 +23,7 @@ public class Avion {
 
     public Avion() {}
 
-    public Avion(String matricula, String fabricante, String modelo, int horasVuelo) {
+    public Avion(String matricula, String fabricante, String modelo, Integer horasVuelo) {
         this.matricula = matricula;
         this.fabricante = fabricante;
         this.modelo = modelo;
@@ -54,11 +54,11 @@ public class Avion {
         this.modelo = modelo;
     }
 
-    public int getHorasVuelo() {
+    public Integer getHorasVuelo() {
         return horasVuelo;
     }
 
-    public void setHorasVuelo(int horasVuelo) {
+    public void setHorasVuelo(Integer horasVuelo) {
         this.horasVuelo = horasVuelo;
     }
 

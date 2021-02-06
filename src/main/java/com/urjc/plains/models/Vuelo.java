@@ -9,7 +9,7 @@ public class Vuelo {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long codigoVuelo;
 
     private String compania;
 
@@ -25,30 +25,30 @@ public class Vuelo {
     @JoinColumn(name = "aeropuertoDestino")
     private Aeropuerto aeropuertoDestino;
 
-    private Date fechaHoraVuelo;
+    private Date fechaHora;
 
-    private int duracionVuelo;
+    private Double duracion;
 
     @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
     private List<VueloTripulante> tripulantes;
 
-    public Vuelo(String compania, Avion avion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, Date fechaHoraVuelo, int duracionVuelo) {
+    public Vuelo(String compania, Avion avion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, Date fechaHora, Double duracion) {
         this.compania = compania;
         this.avion = avion;
         this.aeropuertoOrigen = aeropuertoOrigen;
         this.aeropuertoDestino = aeropuertoDestino;
-        this.fechaHoraVuelo = fechaHoraVuelo;
-        this.duracionVuelo = duracionVuelo;
+        this.fechaHora = fechaHora;
+        this.duracion = duracion;
     }
 
     public Vuelo() {}
 
-    public Long getId() {
-        return id;
+    public Long getCodigoVuelo() {
+        return codigoVuelo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCodigoVuelo(Long id) {
+        this.codigoVuelo = id;
     }
 
     public String getCompania() {
@@ -83,20 +83,20 @@ public class Vuelo {
         this.aeropuertoDestino = aeropuertoDestino;
     }
 
-    public Date getFechaHoraVuelo() {
-        return fechaHoraVuelo;
+    public Date getFechaHora() {
+        return fechaHora;
     }
 
-    public void setFechaHoraVuelo(Date fechaHoraVuelo) {
-        this.fechaHoraVuelo = fechaHoraVuelo;
+    public void setFechaHora(Date fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
-    public int getDuracionVuelo() {
-        return duracionVuelo;
+    public Double getDuracion() {
+        return duracion;
     }
 
-    public void setDuracionVuelo(int duracionVuelo) {
-        this.duracionVuelo = duracionVuelo;
+    public void setDuracion(Double duracion) {
+        this.duracion = duracion;
     }
 
     public List<VueloTripulante> getTripulantes() {

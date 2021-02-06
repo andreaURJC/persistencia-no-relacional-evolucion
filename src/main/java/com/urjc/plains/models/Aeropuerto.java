@@ -1,5 +1,6 @@
 package com.urjc.plains.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -9,6 +10,7 @@ import java.util.List;
 public class Aeropuerto {
 
     @Id
+    @Column(length = 3)
     private String iata;
 
     private String nombre;
@@ -17,7 +19,7 @@ public class Aeropuerto {
 
     private String pais;
 
-    @OneToMany(mappedBy = "aeropuertoRevision")
+    @OneToMany(mappedBy = "aeropuerto")
     private List<Revision> revisiones;
 
     @OneToMany(mappedBy = "aeropuertoOrigen")

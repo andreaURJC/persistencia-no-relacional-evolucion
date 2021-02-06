@@ -17,7 +17,7 @@ public class Mecanico extends Empleado {
 
     private String formacion;
 
-    @OneToMany(mappedBy = "empleadoCargo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     private List<Revision> revisiones;
 
     public Mecanico() {}

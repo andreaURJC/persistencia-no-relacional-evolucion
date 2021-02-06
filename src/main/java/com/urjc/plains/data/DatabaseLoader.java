@@ -47,8 +47,8 @@ public class DatabaseLoader implements CommandLineRunner {
 
         avionRepository.saveAll(Arrays.asList(avionJumbo, avionAirbus));
 
-        Aeropuerto aeropuertoLeon = new Aeropuerto("LLLL", "Aeropuerto de Leon", "Leon", "ESP");
-        Aeropuerto aeropuertoAlicante = new Aeropuerto("AAAA","Aeropuerto de Alicante", "Alicante", "ESP");
+        Aeropuerto aeropuertoLeon = new Aeropuerto("LEO", "Aeropuerto de Leon", "Leon", "ESP");
+        Aeropuerto aeropuertoAlicante = new Aeropuerto("ALC","Aeropuerto de Alicante", "Alicante", "ESP");
 
         aeropuertoRepository.saveAll(Arrays.asList(aeropuertoAlicante, aeropuertoLeon));
 
@@ -60,8 +60,8 @@ public class DatabaseLoader implements CommandLineRunner {
         Tripulante tripulante1 = new Tripulante("Rafael", "Santos", "Iberia", "Azafato");
         Tripulante tripulante2 = new Tripulante("Ane", "Colina", "Emirates", "Azafata");
 
-        Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, null, 2);
-        Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, null, 2);
+        Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, null, 2.587);
+        Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, null, 3.27);
 
         VueloTripulante v1t1 = new VueloTripulante(vuelo1,tripulante1);
         VueloTripulante v1t2 = new VueloTripulante(vuelo1,tripulante2);

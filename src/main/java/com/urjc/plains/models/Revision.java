@@ -1,7 +1,5 @@
 package com.urjc.plains.models;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,36 +11,36 @@ public class Revision {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "avionRevisado")
-    private Avion avionRevisado;
+    @JoinColumn(name = "avion")
+    private Avion avion;
 
     private Date fechaInicio;
 
     private Date fechaFin;
 
-    private int duracionRevision;
+    private int horas;
 
     @ManyToOne
-    @JoinColumn(name = "empleadoCargo")
-    private Mecanico empleadoCargo;
+    @JoinColumn(name = "empleado")
+    private Mecanico empleado;
 
-    private String tipoRevision;
+    private String tipo;
 
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "aeropuertoRevision")
-    private Aeropuerto aeropuertoRevision;
+    @JoinColumn(name = "aeropuerto")
+    private Aeropuerto aeropuerto;
 
-    public Revision(Avion avionRevisado, Date fechaInicio, Date fechaFin, int duracionRevision, Mecanico empleadoCargo, String tipoRevision, String descripcion, Aeropuerto aeropuertoRevision) {
-        this.avionRevisado = avionRevisado;
+    public Revision(Avion avion, Date fechaInicio, Date fechaFin, int horas, Mecanico empleado, String tipo, String descripcion, Aeropuerto aeropuerto) {
+        this.avion = avion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.duracionRevision = duracionRevision;
-        this.empleadoCargo = empleadoCargo;
-        this.tipoRevision = tipoRevision;
+        this.horas = horas;
+        this.empleado = empleado;
+        this.tipo = tipo;
         this.descripcion = descripcion;
-        this.aeropuertoRevision = aeropuertoRevision;
+        this.aeropuerto = aeropuerto;
     }
 
     public Revision() {}
@@ -55,12 +53,12 @@ public class Revision {
         this.id = id;
     }
 
-    public Avion getAvionRevisado() {
-        return avionRevisado;
+    public Avion getAvion() {
+        return avion;
     }
 
-    public void setAvionRevisado(Avion avionRevisado) {
-        this.avionRevisado = avionRevisado;
+    public void setAvion(Avion avion) {
+        this.avion = avion;
     }
 
     public Date getFechaInicio() {
@@ -79,28 +77,28 @@ public class Revision {
         this.fechaFin = fechaFin;
     }
 
-    public int getDuracionRevision() {
-        return duracionRevision;
+    public int getHoras() {
+        return horas;
     }
 
-    public void setDuracionRevision(int duracionRevision) {
-        this.duracionRevision = duracionRevision;
+    public void setHoras(int horas) {
+        this.horas = horas;
     }
 
-    public Mecanico getEmpleadoCargo() {
-        return empleadoCargo;
+    public Mecanico getEmpleado() {
+        return empleado;
     }
 
-    public void setEmpleadoCargo(Mecanico empleadoCargo) {
-        this.empleadoCargo = empleadoCargo;
+    public void setEmpleado(Mecanico empleado) {
+        this.empleado = empleado;
     }
 
-    public String getTipoRevision() {
-        return tipoRevision;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipoRevision(String tipoRevision) {
-        this.tipoRevision = tipoRevision;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getDescripcion() {
@@ -111,11 +109,11 @@ public class Revision {
         this.descripcion = descripcion;
     }
 
-    public Aeropuerto getAeropuertoRevision() {
-        return aeropuertoRevision;
+    public Aeropuerto getAeropuerto() {
+        return aeropuerto;
     }
 
-    public void setAeropuertoRevision(Aeropuerto aeropuertoRevision) {
-        this.aeropuertoRevision = aeropuertoRevision;
+    public void setAeropuerto(Aeropuerto aeropuerto) {
+        this.aeropuerto = aeropuerto;
     }
 }
