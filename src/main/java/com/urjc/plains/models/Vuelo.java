@@ -29,11 +29,11 @@ public class Vuelo {
 
     private int duracionVuelo;
 
-    @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
     private List<VueloTripulante> tripulantes;
 
-    public Vuelo(String company, Avion avion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, Date fechaHoraVuelo, int duracionVuelo) {
-        this.compania = company;
+    public Vuelo(String compania, Avion avion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, Date fechaHoraVuelo, int duracionVuelo) {
+        this.compania = compania;
         this.avion = avion;
         this.aeropuertoOrigen = aeropuertoOrigen;
         this.aeropuertoDestino = aeropuertoDestino;

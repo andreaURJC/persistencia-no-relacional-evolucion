@@ -1,4 +1,4 @@
-package com.urjc.plains.repository;
+package com.urjc.plains.repositories;
 
 import com.urjc.plains.models.Tripulante;
 import org.springframework.data.jpa.repository.JpaRepository;

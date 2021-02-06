@@ -1,18 +1,13 @@
 package com.urjc.plains.data;
 
+import com.urjc.plains.dtos.AvionesRevisadosDTO;
 import com.urjc.plains.models.*;
-import com.urjc.plains.repository.*;
+import com.urjc.plains.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.time.Instant;
-import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,8 +37,8 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        Mecanico mecanico1 = new Mecanico("Dionisio", "Alvarez", "Mecatron", 1234, 1995, "Modulo FP");
-        Mecanico mecanico2 = new Mecanico("Antonio", "Gutierrez", "SuperAviones", 0023, 2003, "Grado en Aeronautica");
+        Mecanico mecanico1 = new Mecanico("Dionisio", "Alvarez", "Mecatron", 1995, "Modulo FP");
+        Mecanico mecanico2 = new Mecanico("Antonio", "Gutierrez", "SuperAviones", 2003, "Grado en Aeronautica");
 
         mecanicoRepository.saveAll(Arrays.asList(mecanico1, mecanico2));
 
@@ -62,8 +57,8 @@ public class DatabaseLoader implements CommandLineRunner {
 
         revisionRepository.saveAll(Arrays.asList(revision1, revision2));
 
-        Tripulante tripulante1 = new Tripulante("Rafael", "Santos", "Iberia", 0010, "Azafato");
-        Tripulante tripulante2 = new Tripulante("Ane", "Colina", "Emirates", 0020, "Azafata");
+        Tripulante tripulante1 = new Tripulante("Rafael", "Santos", "Iberia", "Azafato");
+        Tripulante tripulante2 = new Tripulante("Ane", "Colina", "Emirates", "Azafata");
 
         Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, null, 2);
         Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, null, 2);
@@ -76,5 +71,14 @@ public class DatabaseLoader implements CommandLineRunner {
         vuelo2.setTripulantes(Arrays.asList(v2t1));
 
         vueloRepository.saveAll(Arrays.asList(vuelo1, vuelo2));
+
+        List<AvionesRevisadosDTO> avionesRevisados = mecanicoRepository.findAvionesWithMecanicos();
+
+        System.out.println("----------------------------------------");
+        System.out.println("-------------- Consulta 1 --------------");
+        System.out.println("----------------------------------------");
+        avionesRevisados.forEach(avion -> System.out.println(avion));
+        System.out.println("----------------------------------------");
+
     }
 }

@@ -6,28 +6,27 @@ import java.util.List;
 @Entity
 public class Tripulante extends Empleado {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    private String compania;
 
     private String puesto;
 
-    @OneToMany(mappedBy = "tripulante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tripulante", cascade = CascadeType.ALL)
     private List<VueloTripulante> vuelos;
 
     public Tripulante() {}
 
-    public Tripulante(String nombre, String apellidos, String empresa, int codigoEmpresa, String puesto) {
-        super(nombre, apellidos, empresa, codigoEmpresa);
+    public Tripulante(String nombre, String apellidos, String compania, String puesto) {
+        super(nombre, apellidos);
+        this.compania = compania;
         this.puesto = puesto;
     }
 
-    public Long getId() {
-        return id;
+    public String getCompania() {
+        return compania;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCompania(String compania) {
+        this.compania = compania;
     }
 
     public String getPuesto() {

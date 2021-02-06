@@ -7,24 +7,18 @@ import javax.persistence.*;
 public abstract class Empleado {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nombre;
 
     private String apellidos;
 
-    private String empresa;
-
-    private int codigoEmpresa;
-
     Empleado(){}
 
-    Empleado(String nombre, String apellidos, String empresa, int codigoEmpresa) {
+    Empleado(String nombre, String apellidos) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.empresa = empresa;
-        this.codigoEmpresa = codigoEmpresa;
     }
 
     public Long getId() {
@@ -49,21 +43,5 @@ public abstract class Empleado {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
-    public int getCodigoEmpresa() {
-        return codigoEmpresa;
-    }
-
-    public void setCodigoEmpresa(int codigoEmpresa) {
-        this.codigoEmpresa = codigoEmpresa;
     }
 }
