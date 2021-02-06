@@ -9,11 +9,11 @@ public class VueloTripulante {
     private VueloTripulanteId id;
 
     @ManyToOne
-    @MapsId("id")
+    @MapsId("vueloId")
     private Vuelo vuelo;
 
     @ManyToOne
-    @MapsId("id")
+    @MapsId("tripulanteId")
     private Tripulante tripulante;
 
     public VueloTripulante() {}
