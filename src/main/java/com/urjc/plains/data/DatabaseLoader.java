@@ -55,12 +55,33 @@ public class DatabaseLoader implements CommandLineRunner {
         avionRepository.saveAll(Arrays.asList(avionJumbo, avionAirbus));
 
         Aeropuerto aeropuertoLeon = new Aeropuerto("LEO", "Aeropuerto de Leon", "Leon", "ESP");
-        Aeropuerto aeropuertoAlicante = new Aeropuerto("ALC","Aeropuerto de Alicante", "Alicante", "ESP");
+        Aeropuerto aeropuertoAlicante = new Aeropuerto("ALC", "Aeropuerto de Alicante", "Alicante", "ESP");
 
         aeropuertoRepository.saveAll(Arrays.asList(aeropuertoAlicante, aeropuertoLeon));
 
-        Revision revision1 = new Revision(avionAirbus, null, null, 10, mecanico1, "anual", "montaje, motor, etc", aeropuertoAlicante);
-        Revision revision2 = new Revision(avionJumbo, null, null, 10, mecanico2, "anual", "montaje, motor, etc", aeropuertoLeon);
+        int duracionRevision1 = 10;
+        int duracionRevision2 = 15;
+
+        Calendar cRevisionInicio1 = Calendar.getInstance();
+        cRevisionInicio1.add(Calendar.MONTH, 1);
+        cRevisionInicio1.add(Calendar.DAY_OF_WEEK, 2);
+
+        Calendar cRevisionFin1 = Calendar.getInstance();
+        cRevisionFin1.add(Calendar.MONTH, 1);
+        cRevisionFin1.add(Calendar.DAY_OF_WEEK, 2);
+        cRevisionFin1.add(Calendar.MINUTE, 10);
+        cRevisionFin1.add(Calendar.HOUR, duracionRevision1);
+
+        Calendar cRevisionInicio2 = Calendar.getInstance();
+        cRevisionInicio2.add(Calendar.MONTH, 3);
+
+        Calendar cRevisionFin2 = Calendar.getInstance();
+        cRevisionFin2.add(Calendar.MONTH, 3);
+        cRevisionFin2.add(Calendar.HOUR, duracionRevision2);
+        cRevisionFin2.add(Calendar.MINUTE, 20);
+
+        Revision revision1 = new Revision(avionAirbus, cRevisionInicio1.getTime(), cRevisionFin1.getTime(), duracionRevision1, mecanico1, "anual", "montaje, motor, etc", aeropuertoAlicante);
+        Revision revision2 = new Revision(avionJumbo, cRevisionInicio2.getTime(), cRevisionFin2.getTime(), duracionRevision2, mecanico2, "anual", "montaje, motor, etc", aeropuertoLeon);
 
         revisionRepository.saveAll(Arrays.asList(revision1, revision2));
 
@@ -74,11 +95,11 @@ public class DatabaseLoader implements CommandLineRunner {
         Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, cVuelo1.getTime(), 2.587);
         Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, cVuelo2.getTime(), 3.27);
 
-        VueloTripulante v1t1 = new VueloTripulante(vuelo1,tripulante1);
-        VueloTripulante v1t2 = new VueloTripulante(vuelo1,tripulante2);
-        VueloTripulante v2t1 = new VueloTripulante(vuelo2,tripulante1);
+        VueloTripulante v1t1 = new VueloTripulante(vuelo1, tripulante1);
+        VueloTripulante v1t2 = new VueloTripulante(vuelo1, tripulante2);
+        VueloTripulante v2t1 = new VueloTripulante(vuelo2, tripulante1);
 
-        vuelo1.setTripulantes(Arrays.asList(v1t1,v1t2));
+        vuelo1.setTripulantes(Arrays.asList(v1t1, v1t2));
         vuelo2.setTripulantes(Arrays.asList(v2t1));
 
         vueloRepository.saveAll(Arrays.asList(vuelo1, vuelo2));
