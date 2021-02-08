@@ -106,4 +106,16 @@ public class Vuelo {
     public void setTripulantes(List<VueloTripulante> tripulantes) {
         this.tripulantes = tripulantes;
     }
+
+    @Override
+    public String toString() {
+
+        return "Vuelo[ codigoVuelo: " + codigoVuelo +
+                " | compania: " + compania +
+                " | avion: " + avion.getModelo() +
+                " | aeropuertoOrigen: " + aeropuertoOrigen.getIata() +
+                " | aeropuertoDestino: " + aeropuertoDestino.getIata() +
+                " | fechaHora: " + fechaHora +
+                " | duracion: " + duracion + " ]";
+    }
 }

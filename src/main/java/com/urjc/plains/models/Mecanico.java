@@ -53,4 +53,12 @@ public class Mecanico extends Empleado {
     public void setFormacion(String formacion) {
         this.formacion = formacion;
     }
+
+    @Override
+    public String toString() {
+        String padre = super.toString();
+        return padre + " | Mecanico[ empresa: " + empresa +
+        " | anoIncorporacion: " + anoIncorporacion +
+        " | formacion: " + formacion + " ]";
+    }
 }

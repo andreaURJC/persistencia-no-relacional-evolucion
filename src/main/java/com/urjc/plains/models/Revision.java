@@ -116,4 +116,19 @@ public class Revision {
     public void setAeropuerto(Aeropuerto aeropuerto) {
         this.aeropuerto = aeropuerto;
     }
+
+    @Override
+    public String toString() {
+        return "Revision[ id: " + id +
+                " | avion: " + avion.getModelo() +
+                " | fechaInicio: " + fechaInicio +
+                " | fechaFin: " + fechaFin +
+                " | horas: " + horas +
+                " | mecanico: " + mecanico.getNombre() + " " + mecanico.getApellidos() +
+                " | tipo: " + tipo +
+                " | descripcion: " + descripcion +
+                " | aeropuerto: " + aeropuerto.getIata() + " ]";
+    }
+
+    
 }

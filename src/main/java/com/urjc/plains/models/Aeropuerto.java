@@ -92,4 +92,15 @@ public class Aeropuerto {
     public void setVuelosLlegada(List<Vuelo> vuelosLlegada) {
         this.vuelosLlegada = vuelosLlegada;
     }
+
+    @Override
+    public String toString() {
+
+        return "Revision[ iata: " + iata +
+        " | nombre: " + nombre +
+        " | ciudad: " + ciudad +
+        " | pais: " + pais + " ]";
+    }
+
+    
 }

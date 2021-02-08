@@ -41,6 +41,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     AeropuertoRepository aeropuertoRepository;
 
+    @Autowired
+    VueloTripulanteRepository vueloTripulanteRepository;
+
     @Override
     public void run(String... args) {
 
@@ -48,40 +51,85 @@ public class DatabaseLoader implements CommandLineRunner {
         Mecanico mecanico2 = new Mecanico("Antonio", "Gutierrez", "SuperAviones", 2003, "Grado en Aeronautica");
 
         mecanicoRepository.saveAll(Arrays.asList(mecanico1, mecanico2));
-
+        List<Mecanico> mecanicos = mecanicoRepository.findAll();
+        
         Avion avionJumbo = new Avion("B-0747", "Boeing", "747", 200);
         Avion avionAirbus = new Avion("A-0380", "Airbus Group", "A380", 550);
-
+        
         avionRepository.saveAll(Arrays.asList(avionJumbo, avionAirbus));
-
+        List<Avion> aviones = avionRepository.findAll();
+        
         Aeropuerto aeropuertoLeon = new Aeropuerto("LEO", "Aeropuerto de Leon", "Leon", "ESP");
         Aeropuerto aeropuertoAlicante = new Aeropuerto("ALC","Aeropuerto de Alicante", "Alicante", "ESP");
-
+        
         aeropuertoRepository.saveAll(Arrays.asList(aeropuertoAlicante, aeropuertoLeon));
-
+        List<Aeropuerto> aeropuertos = aeropuertoRepository.findAll();
+        
         Revision revision1 = new Revision(avionAirbus, null, null, 10, mecanico1, "anual", "montaje, motor, etc", aeropuertoAlicante);
         Revision revision2 = new Revision(avionJumbo, null, null, 10, mecanico2, "anual", "montaje, motor, etc", aeropuertoLeon);
-
+        
         revisionRepository.saveAll(Arrays.asList(revision1, revision2));
-
+        List<Revision> revisiones = revisionRepository.findAll();
+        for (Revision revision : revisiones ) {
+            revision.getAeropuerto();
+            revision.getAvion();
+            revision.getMecanico();
+        }
+        
         Tripulante tripulante1 = new Tripulante("Rafael", "Santos", "Iberia", "Azafato");
         Tripulante tripulante2 = new Tripulante("Ane", "Colina", "Emirates", "Azafata");
-
+        
         Calendar cVuelo1 = Calendar.getInstance();
         Calendar cVuelo2 = Calendar.getInstance();
         cVuelo2.add(Calendar.MONTH, -2);
-
+        
         Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, cVuelo1.getTime(), 2.587);
         Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, cVuelo2.getTime(), 3.27);
-
+        
         VueloTripulante v1t1 = new VueloTripulante(vuelo1,tripulante1);
         VueloTripulante v1t2 = new VueloTripulante(vuelo1,tripulante2);
         VueloTripulante v2t1 = new VueloTripulante(vuelo2,tripulante1);
-
+        
         vuelo1.setTripulantes(Arrays.asList(v1t1,v1t2));
         vuelo2.setTripulantes(Arrays.asList(v2t1));
-
+        
         vueloRepository.saveAll(Arrays.asList(vuelo1, vuelo2));
+        
+        List<Tripulante> tripulantes = tripulanteRepository.findAll();
+        
+        List<Vuelo> vuelos = vueloRepository.findAll();
+        for (Vuelo vuelo : vuelos) {
+            vuelo.getAeropuertoOrigen();
+            vuelo.getAeropuertoDestino();
+            vuelo.getAvion();
+        }
+
+        List<VueloTripulante> vuelosTripulantes = vueloTripulanteRepository.findAll();
+        for (VueloTripulante vueloTripulante : vuelosTripulantes) {
+            vueloTripulante.getTripulante();
+            vueloTripulante.getVuelo();
+        }
+        
+        System.out.println("Listado de mecánicos:");
+        muestraDatos(mecanicos);
+        
+        System.out.println("Listado de aviones:");
+        muestraDatos(aviones);
+        
+        System.out.println("Listado de aeropuertos:");
+        muestraDatos(aeropuertos);
+        
+        System.out.println("Listado de revisiones:");
+        muestraDatos(revisiones);
+        
+        System.out.println("Listado de tripulantes:");
+        muestraDatos(tripulantes);
+        
+        System.out.println("Listado de vuelos:");
+        muestraDatos(vuelos);
+
+        System.out.println("Listado de vuelos:");
+        muestraDatos(vuelosTripulantes);
 
         List<AvionesRevisadosDTO> avionesRevisados = mecanicoRepository.findAvionesWithMecanicos();
 
@@ -97,24 +145,24 @@ public class DatabaseLoader implements CommandLineRunner {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = dateFormat.format(cVuelo1.getTime());
 
-        List<VuelosPorCiudadDestinoYFechaDTO> vuelos = vueloRepository.findVuelosByDestinoAndFecha(destino, strDate);
+        List<VuelosPorCiudadDestinoYFechaDTO> vuelosByDestino = vueloRepository.findVuelosByDestinoAndFecha(destino, strDate);
         System.out.println();
         System.out.println("----------------------------------------");
         System.out.println("-------------- Consulta 2 --------------");
         System.out.println("----------------------------------------");
         System.out.println("Vuelos con destino " + destino + " para la fecha " + strDate + ":");
-        vuelos.forEach(vuelo -> System.out.println(vuelo));
+        vuelosByDestino.forEach(vuelo -> System.out.println(vuelo));
         System.out.println("----------------------------------------");
         System.out.println();
 
         Optional<Tripulante> tripulanteConsulta = tripulanteRepository.findAll().stream().findFirst();
-        System.out.println();
-        System.out.println("----------------------------------------");
-        System.out.println("-------------- Consulta 3 --------------");
-        System.out.println("----------------------------------------");
         if (tripulanteConsulta.isPresent()) {
             Long codigoEmpleado = tripulanteConsulta.get().getCodigoEmpleado();
             List<CiudadesOrigenTripulanteDTO> ciudades = tripulanteRepository.findCiudadesOrigenByCodigoEmpleado(codigoEmpleado);
+            System.out.println();
+            System.out.println("----------------------------------------");
+            System.out.println("-------------- Consulta 3 --------------");
+            System.out.println("----------------------------------------");
             if (ciudades.isEmpty()) {
                 System.out.println("No se han encontrado vuelos para el código de empleado: " + codigoEmpleado + ".");
             } else {
@@ -124,6 +172,10 @@ public class DatabaseLoader implements CommandLineRunner {
                 ciudades.forEach(ciudad -> System.out.println(ciudad));
             }
         } else {
+            System.out.println();
+            System.out.println("----------------------------------------");
+            System.out.println("-------------- Consulta 3 --------------");
+            System.out.println("----------------------------------------");
             System.out.println("No se ha encontrado ningún tripulante.");
         }
         System.out.println("----------------------------------------");
@@ -137,6 +189,13 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("----------------------------------------");
         resumen.forEach(tripulanteResumen -> System.out.println(tripulanteResumen));
         System.out.println("----------------------------------------");
+        System.out.println();
+    }
+
+    private static void muestraDatos(List datos) {
+        for (Object p : datos) {
+            System.out.println(p);
+        }
         System.out.println();
     }
 }

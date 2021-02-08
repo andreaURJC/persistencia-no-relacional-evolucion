@@ -47,4 +47,11 @@ public class VueloTripulante {
     public void setTripulante(Tripulante tripulante) {
         this.tripulante = tripulante;
     }
+
+    @Override
+    public String toString() {
+        
+        return "VueloTripulante[ tripulante: " + tripulante.getNombre() + " " + tripulante.getApellidos() +
+        " | vuelo: " + vuelo.getCodigoVuelo() + " ]";
+    }
 }

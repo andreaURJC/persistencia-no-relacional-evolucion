@@ -77,4 +77,15 @@ public class Avion {
     public void setVuelos(List<Vuelo> vuelos) {
         this.vuelos = vuelos;
     }
+
+    @Override
+    public String toString() {
+
+        return "Avion[ matricula: " + matricula +
+                " | fabricante: " + fabricante +
+                " | modelo: " + modelo +
+                " | horasVuelo: " + horasVuelo + " ]";
+    }
+
+    
 }

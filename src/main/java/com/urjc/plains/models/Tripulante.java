@@ -44,4 +44,11 @@ public class Tripulante extends Empleado {
     public void setVuelos(List<VueloTripulante> vuelos) {
         this.vuelos = vuelos;
     }
+
+    @Override
+    public String toString() {
+        String padre = super.toString();
+        return padre + " | Tripulante[ puesto: " + puesto +
+            " | compania: " + compania + " ]";
+    }
 }

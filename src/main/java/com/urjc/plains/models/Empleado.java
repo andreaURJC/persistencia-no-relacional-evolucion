@@ -44,4 +44,13 @@ public abstract class Empleado {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
+
+    @Override
+    public String toString() {
+        return "Empleado[ codigoEmpleado: " + codigoEmpleado +
+        " | nombre: " + nombre +
+        " | apellidos: " + apellidos + " ]";
+    }
+
+
 }
