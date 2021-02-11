@@ -47,91 +47,15 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        Mecanico mecanico1 = new Mecanico("Dionisio", "Alvarez", "Mecatron", 1995, "Modulo FP");
-        Mecanico mecanico2 = new Mecanico("Antonio", "Gutierrez", "SuperAviones", 2003, "Grado en Aeronautica");
-
-        mecanicoRepository.saveAll(Arrays.asList(mecanico1, mecanico2));
         List<Mecanico> mecanicos = mecanicoRepository.findAll();
-        
-        Avion avionJumbo = new Avion("B-0747", "Boeing", "747", 200);
-        Avion avionAirbus = new Avion("A-0380", "Airbus Group", "A380", 550);
-        
-        avionRepository.saveAll(Arrays.asList(avionJumbo, avionAirbus));
         List<Avion> aviones = avionRepository.findAll();
-        
-        Aeropuerto aeropuertoLeon = new Aeropuerto("LEO", "Aeropuerto de Leon", "Leon", "ESP");
-        Aeropuerto aeropuertoAlicante = new Aeropuerto("ALC", "Aeropuerto de Alicante", "Alicante", "ESP");
-
-        aeropuertoRepository.saveAll(Arrays.asList(aeropuertoAlicante, aeropuertoLeon));
         List<Aeropuerto> aeropuertos = aeropuertoRepository.findAll();
-
-        int duracionRevision1 = 10;
-        int duracionRevision2 = 15;
-
-        Calendar cRevisionInicio1 = Calendar.getInstance();
-        cRevisionInicio1.add(Calendar.MONTH, 1);
-        cRevisionInicio1.add(Calendar.DAY_OF_WEEK, 2);
-
-        Calendar cRevisionFin1 = Calendar.getInstance();
-        cRevisionFin1.add(Calendar.MONTH, 1);
-        cRevisionFin1.add(Calendar.DAY_OF_WEEK, 2);
-        cRevisionFin1.add(Calendar.MINUTE, 10);
-        cRevisionFin1.add(Calendar.HOUR, duracionRevision1);
-
-        Calendar cRevisionInicio2 = Calendar.getInstance();
-        cRevisionInicio2.add(Calendar.MONTH, 3);
-
-        Calendar cRevisionFin2 = Calendar.getInstance();
-        cRevisionFin2.add(Calendar.MONTH, 3);
-        cRevisionFin2.add(Calendar.HOUR, duracionRevision2);
-        cRevisionFin2.add(Calendar.MINUTE, 20);
-
-        Revision revision1 = new Revision(avionAirbus, cRevisionInicio1.getTime(), cRevisionFin1.getTime(), duracionRevision1, mecanico1, "anual", "montaje, motor, etc", aeropuertoAlicante);
-        Revision revision2 = new Revision(avionJumbo, cRevisionInicio2.getTime(), cRevisionFin2.getTime(), duracionRevision2, mecanico2, "anual", "montaje, motor, etc", aeropuertoLeon);
-
-        revisionRepository.saveAll(Arrays.asList(revision1, revision2));
         List<Revision> revisiones = revisionRepository.findAll();
-
-        for (Revision revision : revisiones ) {
-            revision.getAeropuerto();
-            revision.getAvion();
-            revision.getMecanico();
-        }
-        
-        Tripulante tripulante1 = new Tripulante("Rafael", "Santos", "Iberia", "Azafato");
-        Tripulante tripulante2 = new Tripulante("Ane", "Colina", "Emirates", "Azafata");
-        
-        Calendar cVuelo1 = Calendar.getInstance();
-        Calendar cVuelo2 = Calendar.getInstance();
-        cVuelo2.add(Calendar.MONTH, -2);
-        
-        Vuelo vuelo1 = new Vuelo("Iberia", avionJumbo, aeropuertoAlicante, aeropuertoLeon, cVuelo1.getTime(), 2.587);
-        Vuelo vuelo2 = new Vuelo("Ryanair", avionAirbus, aeropuertoLeon, aeropuertoAlicante, cVuelo2.getTime(), 3.27);
-
-        VueloTripulante v1t1 = new VueloTripulante(vuelo1, tripulante1);
-        VueloTripulante v1t2 = new VueloTripulante(vuelo1, tripulante2);
-        VueloTripulante v2t1 = new VueloTripulante(vuelo2, tripulante1);
-
-        vuelo1.setTripulantes(Arrays.asList(v1t1, v1t2));
-        vuelo2.setTripulantes(Arrays.asList(v2t1));
-        
-        vueloRepository.saveAll(Arrays.asList(vuelo1, vuelo2));
-        
         List<Tripulante> tripulantes = tripulanteRepository.findAll();
-        
-        List<Vuelo> vuelos = vueloRepository.findAll();
-        for (Vuelo vuelo : vuelos) {
-            vuelo.getAeropuertoOrigen();
-            vuelo.getAeropuertoDestino();
-            vuelo.getAvion();
-        }
 
+        List<Vuelo> vuelos = vueloRepository.findAll();
         List<VueloTripulante> vuelosTripulantes = vueloTripulanteRepository.findAll();
-        for (VueloTripulante vueloTripulante : vuelosTripulantes) {
-            vueloTripulante.getTripulante();
-            vueloTripulante.getVuelo();
-        }
-        
+
         System.out.println();
         System.out.println("-----------------------------------------");
         System.out.println("----------- Datos insertados ------------");
@@ -139,19 +63,19 @@ public class DatabaseLoader implements CommandLineRunner {
 
         System.out.println("Listado de mecánicos:");
         muestraDatos(mecanicos);
-        
+
         System.out.println("Listado de aviones:");
         muestraDatos(aviones);
-        
+
         System.out.println("Listado de aeropuertos:");
         muestraDatos(aeropuertos);
-        
+
         System.out.println("Listado de revisiones:");
         muestraDatos(revisiones);
-        
+
         System.out.println("Listado de tripulantes:");
         muestraDatos(tripulantes);
-        
+
         System.out.println("Listado de vuelos:");
         muestraDatos(vuelos);
 
@@ -170,7 +94,8 @@ public class DatabaseLoader implements CommandLineRunner {
 
         String destino = "Leon";
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String strDate = dateFormat.format(cVuelo1.getTime());
+        Vuelo vuelo1 = vueloRepository.findById(100L).get();
+        String strDate = dateFormat.format(vuelo1.getFechaHora());
 
         List<VuelosPorCiudadDestinoYFechaDTO> vuelosByDestino = vueloRepository.findVuelosByDestinoAndFecha(destino, strDate);
         System.out.println();
