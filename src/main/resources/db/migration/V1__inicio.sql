@@ -104,13 +104,19 @@ values ('LEO', 'A-0380', 'descripcion de la revision 1', '2021-01-06 20:00:00.00
         'anual', 1),
        ('ALC', 'B-0747', 'descripcion de la revision 2', '2021-01-01 00:00:00.000000', '2021-01-01 20:00:00.000000', 20,
         2,
-        'mensual', 2);
+        'mensual', 2),
+       ('LEO', 'A-0380', 'descripcion de la revision 3', '2020-11-06 20:00:00.000000', '2020-11-06 10:00:00.000000', 10,
+        2, 'mensual', 3);
 insert into vuelo (aeropuerto_destino, aeropuerto_origen, avion, compania, duracion, fecha_hora, codigo_vuelo)
 values ('LEO', 'ALC', 'A-0380', 'IBERIA', 2, '2021-01-03 04:10:00.000000', 0100),
        ('ALC', 'LEO', 'B-0747', 'EMIRATES', 3, '2021-03-04 06:45:00.000000', 0200);
 insert into tripulante (nombre, apellidos, compania, puesto, codigo_empleado)
 values ('Rafael', 'Santos', 'Iberia', 'Azafato', 3),
-       ('Ane', 'Colina', 'Emirates', 'Azafata', 4);
+       ('Ane', 'Colina', 'Emirates', 'Azafata', 4),
+       ('Angel', 'Ramirez', 'Iberia', 'Azafato', 5),
+       ('Andrea', 'Fernandez', 'Emirates', 'Azafata', 6);
 insert into vuelo_tripulante (vuelo_codigo_vuelo, tripulante_codigo_empleado)
 values (0100, 3),
-       (0200, 4);
+       (0200, 4),
+       (0100, 5),
+       (0200, 6);
