@@ -4,16 +4,17 @@ import com.urjc.plains.dtos.AvionesRevisadosDTO;
 import com.urjc.plains.dtos.CiudadesOrigenTripulanteDTO;
 import com.urjc.plains.dtos.ResumenVuelosTripulantesDTO;
 import com.urjc.plains.dtos.VuelosPorCiudadDestinoYFechaDTO;
+import com.urjc.plains.dtos.mongo.ProvinciaPorComunidad;
 import com.urjc.plains.models.*;
+import com.urjc.plains.models.mongo.Provincia;
 import com.urjc.plains.repositories.*;
+import com.urjc.plains.repositories.mongo.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +45,44 @@ public class DatabaseLoader implements CommandLineRunner {
     @Autowired
     VueloTripulanteRepository vueloTripulanteRepository;
 
+    @Autowired
+    ProvinciaRepository provinciaRepository;
+
     @Override
     public void run(String... args) {
+
+        mostrarDatosProvincias();
+
+        //mostrarDatosAviones();
+
+        //consultasPractica1();
+
+        //consultasJSONPractica2();
+    }
+
+    private void mostrarDatosProvincias() {
+
+        List<Provincia> provincias = provinciaRepository.findAll();
+        System.out.println();
+        System.out.println("--------------------------------------------------");
+        System.out.println("-------------- Consulta 1 - MONGODB --------------");
+        System.out.println("--------------------------------------------------");
+        provincias.forEach(provincia -> System.out.println(" Datos de la provincia: " + provincia.getNombre() + "; " + provincia.getDatos()));
+        System.out.println("--------------------------------------------------");
+        System.out.println();
+
+
+        List<ProvinciaPorComunidad> provinciasPorComunidad = provinciaRepository.findProvinciasPorComunidad();
+        System.out.println();
+        System.out.println("--------------------------------------------------");
+        System.out.println("-------------- Consulta 2 - MONGODB --------------");
+        System.out.println("--------------------------------------------------");
+        provinciasPorComunidad.forEach(provincia -> System.out.println(provincia));
+        System.out.println("--------------------------------------------------");
+        System.out.println();
+    }
+
+    private void mostrarDatosAviones() {
 
         List<Mecanico> mecanicos = mecanicoRepository.findAll();
         List<Avion> aviones = avionRepository.findAll();
@@ -81,9 +118,11 @@ public class DatabaseLoader implements CommandLineRunner {
 
         System.out.println("Listado de vuelos:");
         muestraDatos(vuelosTripulantes);
+    }
+
+    private void consultasPractica1() {
 
         List<AvionesRevisadosDTO> avionesRevisados = mecanicoRepository.findAvionesWithMecanicos();
-
         System.out.println();
         System.out.println("----------------------------------------");
         System.out.println("-------------- Consulta 1 --------------");
@@ -142,7 +181,9 @@ public class DatabaseLoader implements CommandLineRunner {
         resumen.forEach(tripulanteResumen -> System.out.println(tripulanteResumen));
         System.out.println("----------------------------------------");
         System.out.println();
+    }
 
+    private void consultasJSONPractica2() {
         List<AvionesRevisadosDTO> avionesRevisadosJSON = mecanicoRepository.findAvionesWithMecanicosJSON();
         System.out.println();
         System.out.println("-----------------------------------------------");
