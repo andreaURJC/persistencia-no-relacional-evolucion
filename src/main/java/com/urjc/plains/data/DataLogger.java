@@ -22,7 +22,7 @@ import java.util.Optional;
  * Cargador de la BD y resultado de las consultas
  */
 @Controller
-public class DatabaseLoader implements CommandLineRunner {
+public class DataLogger implements CommandLineRunner {
 
     @Autowired
     TripulanteRepository tripulanteRepository;
@@ -53,11 +53,12 @@ public class DatabaseLoader implements CommandLineRunner {
 
         mostrarDatosProvincias();
 
+        consultasJSONPractica2();
+
         //mostrarDatosAviones();
 
         //consultasPractica1();
 
-        //consultasJSONPractica2();
     }
 
     private void mostrarDatosProvincias() {
