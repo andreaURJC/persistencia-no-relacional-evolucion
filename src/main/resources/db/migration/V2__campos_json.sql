@@ -4,7 +4,7 @@ ALTER TABLE avion ADD revisiones_json JSON NULL;
 
 /* Update fields */
 UPDATE vuelo
-SET tripulantes_json = (SELECT JSON_ARRAYAGG(tripulante_codigo_empleado)
+SET tripulantes_json = (SELECT JSON_ARRAYAGG(JSON_OBJECT('codigo_empleado',tripulante_codigo_empleado))
 from vuelo_tripulante where vuelo_codigo_vuelo = vuelo.codigo_vuelo);
 
 UPDATE avion
