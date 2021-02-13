@@ -21,6 +21,8 @@ public class Avion {
     @OneToMany(mappedBy = "avion")
     private List<Vuelo> vuelos;
 
+    private String revisionesJson;
+
     public Avion() {}
 
     public Avion(String matricula, String fabricante, String modelo, Integer horasVuelo) {
@@ -30,11 +32,11 @@ public class Avion {
         this.horasVuelo = horasVuelo;
     }
 
-    public String getId() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setId(String matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
@@ -76,6 +78,14 @@ public class Avion {
 
     public void setVuelos(List<Vuelo> vuelos) {
         this.vuelos = vuelos;
+    }
+
+    public String getRevisionesJson() {
+        return revisionesJson;
+    }
+
+    public void setRevisionesJson(String revisionesJson) {
+        this.revisionesJson = revisionesJson;
     }
 
     @Override

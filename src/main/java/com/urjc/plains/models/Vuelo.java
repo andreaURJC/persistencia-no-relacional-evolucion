@@ -30,7 +30,9 @@ public class Vuelo {
     private Double duracion;
 
     @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
-    private List<VueloTripulante> tripulantes;
+    private List<VueloTripulante> vuelosTripulantes;
+
+    private String tripulantesJson;
 
     public Vuelo(String compania, Avion avion, Aeropuerto aeropuertoOrigen, Aeropuerto aeropuertoDestino, Date fechaHora, Double duracion) {
         this.compania = compania;
@@ -99,12 +101,20 @@ public class Vuelo {
         this.duracion = duracion;
     }
 
-    public List<VueloTripulante> getTripulantes() {
-        return tripulantes;
+    public List<VueloTripulante> getVuelosTripulantes() {
+        return vuelosTripulantes;
     }
 
-    public void setTripulantes(List<VueloTripulante> tripulantes) {
-        this.tripulantes = tripulantes;
+    public void setVuelosTripulantes(List<VueloTripulante> vuelosTripulantes) {
+        this.vuelosTripulantes = vuelosTripulantes;
+    }
+
+    public String getTripulantesJson() {
+        return tripulantesJson;
+    }
+
+    public void setTripulantesJson(String tripulantesJson) {
+        this.tripulantesJson = tripulantesJson;
     }
 
     @Override

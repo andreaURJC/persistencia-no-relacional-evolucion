@@ -13,6 +13,8 @@ import java.util.List;
 public interface VueloRepository extends JpaRepository<Vuelo, Long> {
 
     @Query("SELECT new com.urjc.plains.dtos.VuelosPorCiudadDestinoYFechaDTO(v.codigoVuelo, v.compania, v.aeropuertoOrigen.iata, v.aeropuertoDestino.iata, v.fechaHora, v.duracion)" +
-            "FROM Vuelo v JOIN Aeropuerto a ON v.aeropuertoDestino.iata = a.iata WHERE a.ciudad LIKE :ciudadDestino AND FUNCTION('date_format', v.fechaHora, '%d-%m-%Y') = :fecha ORDER BY FUNCTION('date_format', v.fechaHora, '%H')")
+            "FROM Vuelo v JOIN Aeropuerto a ON v.aeropuertoDestino.iata = a.iata " +
+            "WHERE a.ciudad LIKE :ciudadDestino AND FUNCTION('date_format', v.fechaHora, '%d-%m-%Y') = :fecha " +
+            "ORDER BY FUNCTION('date_format', v.fechaHora, '%H')")
     List<VuelosPorCiudadDestinoYFechaDTO> findVuelosByDestinoAndFecha(@Param("ciudadDestino") String ciudadDestino, @Param("fecha") String fecha);
 }
