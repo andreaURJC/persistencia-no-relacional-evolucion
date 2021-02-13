@@ -118,5 +118,6 @@ values ('Rafael', 'Santos', 'Iberia', 'Azafato', 3),
 insert into vuelo_tripulante (vuelo_codigo_vuelo, tripulante_codigo_empleado)
 values (0100, 3),
        (0200, 4),
+       (0200, 5),
        (0100, 5),
        (0200, 6);

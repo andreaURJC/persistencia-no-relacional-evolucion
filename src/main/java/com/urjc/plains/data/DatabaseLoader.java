@@ -142,6 +142,15 @@ public class DatabaseLoader implements CommandLineRunner {
         resumen.forEach(tripulanteResumen -> System.out.println(tripulanteResumen));
         System.out.println("----------------------------------------");
         System.out.println();
+
+        List<AvionesRevisadosDTO> avionesRevisadosJSON = mecanicoRepository.findAvionesWithMecanicosJSON();
+        System.out.println();
+        System.out.println("-----------------------------------------------");
+        System.out.println("-------------- Consulta 1 - JSON --------------");
+        System.out.println("-----------------------------------------------");
+        avionesRevisadosJSON.forEach(avion -> System.out.println(avion));
+        System.out.println("----------------------------------------");
+        System.out.println();
     }
 
     private static void muestraDatos(List datos) {
