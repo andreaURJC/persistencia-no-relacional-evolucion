@@ -149,7 +149,16 @@ public class DatabaseLoader implements CommandLineRunner {
         System.out.println("-------------- Consulta 1 - JSON --------------");
         System.out.println("-----------------------------------------------");
         avionesRevisadosJSON.forEach(avion -> System.out.println(avion));
-        System.out.println("----------------------------------------");
+        System.out.println("-----------------------------------------------");
+        System.out.println();
+
+        List<ResumenVuelosTripulantesDTO> resumenJSON = tripulanteRepository.findResumenVuelosTripulantesJSON();
+        System.out.println();
+        System.out.println("-----------------------------------------------");
+        System.out.println("-------------- Consulta 2 - JSON --------------");
+        System.out.println("-----------------------------------------------");
+        resumenJSON.forEach(tripulanteResumen -> System.out.println(tripulanteResumen));
+        System.out.println("-----------------------------------------------");
         System.out.println();
     }
 

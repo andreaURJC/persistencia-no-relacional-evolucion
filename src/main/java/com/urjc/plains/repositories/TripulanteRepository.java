@@ -21,10 +21,17 @@ public interface TripulanteRepository extends JpaRepository<Tripulante, Long> {
     List<CiudadesOrigenTripulanteDTO> findCiudadesOrigenByCodigoEmpleado(@Param("codigoEmpleado") Long codigoEmpleado);
 
 
-    @Query("SELECT new com.urjc.plains.dtos.ResumenVuelosTripulantesDTO(t.nombre, t.apellidos, COUNT(v.codigoVuelo), SUM(v.duracion))" +
+    @Query("SELECT new com.urjc.plains.dtos.ResumenVuelosTripulantesDTO(t.nombre, t.apellidos, COUNT(v.codigoVuelo), SUM(v.duracion)) " +
             "FROM Tripulante t " +
             "JOIN VueloTripulante vt ON t.codigoEmpleado = vt.id.tripulanteId " +
             "JOIN Vuelo v ON vt.id.vueloId = v.codigoVuelo " +
-            "GROUP BY t.nombre, t.apellidos")
+            "GROUP BY t.nombre, t.apellidos " +
+            "ORDER BY 3 DESC, 4 DESC")
     List<ResumenVuelosTripulantesDTO> findResumenVuelosTripulantes();
+
+    @Query("SELECT new com.urjc.plains.dtos.ResumenVuelosTripulantesDTO(t.nombre, t.apellidos, COUNT(v.codigoVuelo), SUM(v.duracion)) " +
+            "FROM Tripulante t JOIN Vuelo v ON FUNCTION('JSON_CONTAINS', FUNCTION('JSON_EXTRACT', v.tripulantesJson ,'$[*].\"codigo_empleado\"'), FUNCTION('CONVERT', t.codigoEmpleado, JSON), '$') = 1 " +
+            "GROUP BY t.nombre, t.apellidos " +
+            "ORDER BY 3 DESC, 4 DESC")
+    List<ResumenVuelosTripulantesDTO> findResumenVuelosTripulantesJSON();
 }
